@@ -1,5 +1,5 @@
 import React from "react"
-import NewsGrid from "./components/NewsGrid/NewsGrid"
+import NewsContainer from "./components/NewsContainer/NewsContainer"
 import { ApiServiceContextProvider } from './ApiServiceContext/ApiServiceContext'
 
 import "./App.css"
@@ -9,7 +9,7 @@ function App() {
 	return (
 		<>
 			<ApiServiceContextProvider>
-				<NewsGrid />
+				<NewsContainer />
 			</ApiServiceContextProvider>
 		</>
 	)

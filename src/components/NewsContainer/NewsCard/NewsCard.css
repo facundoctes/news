@@ -1,0 +1,13 @@
+.newsCard {
+    font-size: small;
+}
+
+.cardTitle {
+    font-size: medium;
+}
+
+.cardImage {
+    min-height: 10em;
+    max-height: 10em;
+    cursor: pointer;
+}

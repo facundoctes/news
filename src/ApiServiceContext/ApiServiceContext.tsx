@@ -5,7 +5,7 @@ import { SearchResult } from '../models/newsModels';
 interface ISearchParameters {
     q: string, 
     withThumbnails?: boolean, 
-    page: number, 
+    pageNumber: number, 
     pageSize: number
 }
 
