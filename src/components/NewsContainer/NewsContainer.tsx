@@ -9,40 +9,37 @@ import { Alert, Spinner } from "react-bootstrap"
 import "./NewsContainer.css"
 
 const NewsContainer = () => {
-	console.log('render', 'newsContainer');
-	const pageSize: number = 6
+	const pageSize: number = 6;
 
-	const ApiService = useContext(ApiServiceContext)
+	const ApiService = useContext(ApiServiceContext);
 
 	const [searchText, setSearchText] = useState<string>('');
-	const [newsList, setNewsList] = useState<News[]>([])
-	const [totalCount, setTotalCount] = useState<number>(0)
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [pageNumber, setPageNumber] = useState<number>(0)
-	const [errorMessage, setErrorMessage] = useState<string>("")
+	const [newsList, setNewsList] = useState<News[]>([]);
+	const [totalCount, setTotalCount] = useState<number>(0);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [pageNumber, setPageNumber] = useState<number>(1);
+	const [errorMessage, setErrorMessage] = useState<string>("");
 
 	const searchRequest = useCallback(
 		async (textQuery: string) => {
 			if(textQuery === ''){
 				return
 			}
-			console.log('search', textQuery, pageNumber, pageSize)
-			setIsLoading(true)
+			setIsLoading(true);
 			try {
 				const response = await ApiService.searchNews({ q: textQuery, pageNumber, pageSize })
-				setNewsList(response.value || [])
-				console.log(response)
-				setTotalCount(response.totalCount)
-				setIsLoading(false)
-				setSearchText(textQuery)
-				setErrorMessage('')
+				setNewsList(response.value || []);
+				setTotalCount(response.totalCount);
+				setIsLoading(false);
+				setSearchText(textQuery);
+				setErrorMessage('');
 			} catch (error) {
-				setIsLoading(false)
-				setErrorMessage('UPS! Something bad happened, please try again later.')
+				setIsLoading(false);
+				setErrorMessage('UPS! Something bad happened, please try again later.');
 			}
 		},
 		[ApiService, pageNumber]
-	)
+	);
 
 	useEffect(()=> {
 		searchRequest(searchText);

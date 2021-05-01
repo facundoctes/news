@@ -9,29 +9,27 @@ interface IPaginatorProps {
 };
 
 const Paginator = React.memo((props: IPaginatorProps) => {
-    console.log('render', 'paginator');
-
     const printPages = (page: number, pageSize : number, totalCount: number) =>{
         const items = [];
 
         const totalPages:number = Math.ceil(totalCount/pageSize);
-        const start: number = (page-5) < 0 ? 0 : (page-5);
-        const end: number = (start + 10) > totalPages ? totalPages : (start + 10) ;
+        const start: number = (page-5) < 1 ? 1 : (page-5);
+        const end: number = (start + 10) > totalPages ? totalPages : (start + 10);
 
-        if (start > 0) {
-            items.push(<Pagination.First key="first" onClick={() => props.setPage(0)} />)
+        if (start > 1) {
+            items.push(<Pagination.First key="first" onClick={() => props.setPage(0)} />);
         }
 
-        for (let x=start; x < end; x++ ) {
+        for (let x=start; x <= end; x++ ) {
             items.push(
                 <Pagination.Item key={x} active={ x === page } onClick={() => props.setPage(x)}>
-                    { x + 1 }
+                    { x }
                 </Pagination.Item>
             )
         }
 
         if (end < totalPages) {
-            items.push(<Pagination.Last key="last" onClick={() => props.setPage(totalPages-1)}/>)
+            items.push(<Pagination.Last key="last" onClick={() => props.setPage(totalPages)}/>)
         }
 
         return items;
@@ -46,6 +44,6 @@ const Paginator = React.memo((props: IPaginatorProps) => {
 				</Pagination>
         </div>
     );
-})
+});
 
 export default Paginator;

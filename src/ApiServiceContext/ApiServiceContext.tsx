@@ -27,22 +27,22 @@ const ApiServiceContextProvider = (props:any) => {
                         'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
                     },
                     params: {...search, withThumbnails: true}
-                })
+                });
 
                 if (response.status === 200) {
-                    resolve(response.data)
+                    resolve(response.data);
                 }
 
-                reject(response)
+                reject(response);
             } catch (error) {
-                reject(error)
+                reject(error);
             }
-        }) 
+        });
     }
     
     const apiServiceContextValue: IApiServiceContext = {
         searchNews
-    }
+    };
 
     return (
         <ApiServiceContext.Provider value={apiServiceContextValue}>

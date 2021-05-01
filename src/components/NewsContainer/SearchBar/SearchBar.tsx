@@ -1,34 +1,31 @@
-import React from "react"
-import { Button, FormControl, InputGroup } from "react-bootstrap"
-import { useFormik } from "formik"
-
-import "./SearchBar.css"
+import React from "react";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { useFormik } from "formik";
 
 interface searchProps {
-	searchRequest: (textQuery: string) => Promise<void>
-	title: string
+	searchRequest: (textQuery: string) => Promise<void>;
+	title: string;
 }
 
 interface SearchForm {
-	searchBox?: string
+	searchBox?: string;
 }
 
 const initialValues: SearchForm = {
 	searchBox: ""
-}
+};
 
 const validate = (values: SearchForm) => {
-	let errors: SearchForm = {}
+	let errors: SearchForm = {};
 
 	if (!values.searchBox || values.searchBox.length < 5) {
-		errors.searchBox = "The search term must be greater than 4 characters;"
+		errors.searchBox = "The search term must be greater than 4 characters";
 	}
 
-	return errors
+	return errors;
 }
 
 const SearchBar = React.memo((props: searchProps) => {
-	console.log('render', 'searchbar');
 	const formik = useFormik({
 		initialValues,
 		onSubmit: (values: SearchForm) => {
@@ -37,7 +34,7 @@ const SearchBar = React.memo((props: searchProps) => {
 			}
 		},
 		validate,
-	})
+	});
 
 	return (
 		<>
@@ -62,6 +59,6 @@ const SearchBar = React.memo((props: searchProps) => {
 			{formik.errors.searchBox && <div className='text-danger'>{formik.errors.searchBox}</div>}
 		</>
 	)
-})
+});
 
 export default SearchBar

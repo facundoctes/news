@@ -1,12 +1,12 @@
-import React, { useState } from "react"
-import { Card } from "react-bootstrap"
-import { Image, News } from "../../../models/newsModels"
-import Modal from "react-modal"
+import React, { useState } from "react";
+import { Card } from "react-bootstrap";
+import { Image, News } from "../../../models/newsModels";
+import Modal from "react-modal";
 
-import "./NewsCard.css"
+import "./NewsCard.css";
 
 interface INewsCardProps {
-	news: News
+	news: News;
 }
 
 const customStyles = {
@@ -19,19 +19,19 @@ const customStyles = {
 		marginRight: "-50%",
 		transform: "translate(-50%, -50%)",
 	},
-}
+};
 
 const NewsCard = (props: INewsCardProps) => {
-	const [showImage, setShowImage] = useState<boolean>(false)
-	console.log("render", "newscard");
+	const [showImage, setShowImage] = useState<boolean>(false);
+	
 	const bodyDescription = (body: string): string => {
 		const bodyWords = body.split(" ");
 		return bodyWords.length > 20 ? `${bodyWords.slice(0, 19).join(" ")}...` : body;
-	}
+	};
 
 	const handleClickImage = () => {
 		setShowImage(true);
-	}
+	};
 
 	const cardImage = (image: Image) => {
 		const imageSrc = (image.thumbnail?.length && image.thumbnail) || "images/noimage.png";
