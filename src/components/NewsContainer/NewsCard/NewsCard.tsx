@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Card } from "react-bootstrap";
 import { Image, News } from "../../../models/newsModels";
 import Modal from "react-modal";
@@ -34,9 +34,20 @@ const NewsCard = (props: INewsCardProps) => {
 	};
 
 	const cardImage = (image: Image) => {
-		const imageSrc = (image.thumbnail?.length && image.thumbnail) || "images/noimage.png";
+		const errorImage = "images/noimage.png";
+		const imageSrc = (image.thumbnail?.length && image.thumbnail) || errorImage;
 
-		return <Card.Img className='cardImage' variant='top' src={imageSrc} onClick={handleClickImage} />;
+		return (
+			<Card.Img
+				className='cardImage'
+				variant='top'
+				src={imageSrc}
+				onClick={handleClickImage}
+				onError={(e: SyntheticEvent<HTMLImageElement, Event>) => {
+					e.currentTarget.src = errorImage;
+				}}
+			/>
+		)
 	}
 
 	return (
