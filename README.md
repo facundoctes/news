@@ -1,10 +1,10 @@
 ## Search News
 
-An application used search news using contextualwebsearch API.
+An application to search for news using the contextual web search API. 
 
 ## Project Screen Shot(s)
 
-![name-of-you-image](https://github.com/facundoctes/news/tree/main/screenshot/screenshot1.png)
+![Screenshot](screenshot/screenshot1.png)
 
 ## Installation and Setup Instructions
 
