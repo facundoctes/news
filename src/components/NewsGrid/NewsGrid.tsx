@@ -8,16 +8,15 @@ import "./NewsGrid.css"
 
 const NewsGrid = () => {
 	const ApiService = useContext(ApiServiceContext)
+	const pageSize: number = 9;
 	const [newsList, setNewsList] = useState<News[]>([])
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [page, setPage] = useState<number>(0)
-	const [pageSize, setPageSize] = useState<number>(9)
 	const [errorMessage, setErrorMessage] = useState<string>("")
 
 	const searchRequest = useCallback(
 		async (textQuery: string) => {
 			setIsLoading(true)
-
 			try {
 				const response = await ApiService.searchNews({ q: textQuery, page, pageSize })
 				setNewsList(response.value || [])
@@ -32,10 +31,10 @@ const NewsGrid = () => {
 
 	return (
 		<>
-			<SearchBar searchRequest={searchRequest} />
+			<SearchBar searchRequest={searchRequest} title="Search News" />
 			{isLoading && "Loading...."}
 			<div className='d-flex flex-wrap justify-content-center bg-secondary w-100 '>
-				{(newsList.length && newsList.map((news: News) => <NewsCard key={news.id} news={news} />)) || 'Empty'}
+				{(newsList.length && newsList.map((news: News) => <NewsCard key={news.id} news={news} />)) || "Empty"}
 			</div>
 			{errorMessage !== "" && `Error: ${errorMessage}`}
 			<div className='d-flex justify-content-center my-4'>

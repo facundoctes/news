@@ -16,22 +16,17 @@ interface IApiServiceContext {
 const ApiServiceContext : React.Context<IApiServiceContext> = React.createContext<IApiServiceContext>(null!);
 
 const ApiServiceContextProvider = (props:any) => {
-    const apiURI: string = 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/';
-    const endpoint: string = 'NewsSearchAPI';
-    const apiKey: string = 'e28105562fmsh01edebafeeb6117p1f37e7jsn0221a314ae3d';
-    const apiHost: string = 'contextualwebsearch-websearch-v1.p.rapidapi.com';
-
-    const axiosInstance: AxiosInstance = axios.create({ baseURL: apiURI });
+    const axiosInstance: AxiosInstance = axios.create({ baseURL: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/' });
 
     const searchNews = (search: ISearchParameters) : Promise<SearchResult> => {
         return new Promise(async (resolve, reject) => {
             try {
-                const response = await axiosInstance.get<SearchResult>(endpoint, {
+                const response = await axiosInstance.get<SearchResult>('NewsSearchAPI', {
                     headers: {
-                        'x-rapidapi-key': apiKey,
-                        'x-rapidapi-host': apiHost
+                        'x-rapidapi-key': 'e28105562fmsh01edebafeeb6117p1f37e7jsn0221a314ae3d',
+                        'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com'
                     },
-                    params: search
+                    params: {...search, withThumbnails: true}
                 })
 
                 if (response.status === 200) {

@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, Button } from 'react-bootstrap';
-import { News } from "../../../models/newsModels";
+import { Image, News } from "../../../models/newsModels";
 
 interface INewsCardProps {
 	news: News
@@ -12,10 +12,16 @@ const NewsCard = (props : INewsCardProps) => {
 		return bodyWords.length > 20 ? `${bodyWords.slice(0,20).join(' ')}...` : body;
 	}
 
+	const cardImage = (image: Image) => {
+		const imageSrc = (image.thumbnail?.length && image.thumbnail) || 'images/noimage.png'
+
+		return <Card.Img variant='top' src={imageSrc} />
+	}
+
 	return (
 		<>
 		<Card className='m-2 col-9 col-md-5 col-lg-3'>
-			<Card.Img variant='top' src='holder.js/100px180' />
+			{cardImage(props.news.image)}
 			<Card.Body>
 				<Card.Title>{props.news.title}</Card.Title>
 				<Card.Text>{bodyDescription(props.news.body)}</Card.Text>

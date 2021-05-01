@@ -9,9 +9,6 @@ function App() {
 	return (
 		<>
 			<ApiServiceContextProvider>
-				<header>
-					<h2>News Search</h2>
-				</header>
 				<NewsGrid />
 			</ApiServiceContextProvider>
 		</>
